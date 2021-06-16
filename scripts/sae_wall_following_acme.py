@@ -30,7 +30,7 @@ def control(error):
 
 	# TO-DO: Implement controller
 	# ---
-
+  # Aaron will code this.  See the return values of follow_center()
 	# ---
 
 	# Set maximum thresholds for steering angles
@@ -43,13 +43,17 @@ def control(error):
 
 	# TO-DO: Publish the message
 	# ---
-
+  # Aaron will code this.  Note that he will need to implement a publisher down at the bottom (we think?)
 	# ---
 
 def get_index(angle, data):
 	# 	# TO-DO: For a given angle, return the corresponding index for the data.ranges array
 	# ---
-
+  # Rewrite our original get_index function so that it returns a single number for the index.  We can then use this number to extract further angle and mid-angle points.
+  # Erika is going to adapt that code.
+  # This should return a single value index (an int value)
+  
+  return index
 	# ---
 
 def distance(angle_right, angle_lookahead, data):
@@ -58,7 +62,7 @@ def distance(angle_right, angle_lookahead, data):
 
 	# TO-DO: Find index of the two rays, and calculate a, b, alpha and theta. Find the actual distance from the right wall.
 	# ---
-
+  # CJ will code this
 	# ---
 
 	print "Distance from right wall : %f" % distance_r
@@ -79,7 +83,7 @@ def follow_center(angle_right,angle_lookahead_right, data):
 
 	# Find Centerline error
 	# ---
-
+  # CJ will code this
 	# ---
 
 	print "Centerline error = %f " % centerline_error
@@ -89,8 +93,8 @@ def follow_center(angle_right,angle_lookahead_right, data):
 def callback(data):
 
 	# Pick two rays at two angles
-	angle_right = 
-	angle_lookahead = 
+	angle_right = 90
+	angle_lookahead = 60
 
 	# To follow right wall
 	#er, dr = distance(angle_right,angle_lookahead, data)
@@ -106,7 +110,8 @@ if __name__ == '__main__':
 
 	# TO-DO: Implement the publishers and subscribers
 	# ---
-
+	# This code needs to be checked to make sure its right.  CJ will take a look at completing this.  What is AckemannDriveStamped?
+  sub = rospy.Subscriber("/scan", LaserScan, callback) # This shoud be correct?  Check!
 	# ---
 
 	rospy.spin()
