@@ -93,8 +93,8 @@ def follow_center(angle_right,angle_lookahead_right, data):
 def callback(data):
 
 	# Pick two rays at two angles
-	angle_right = 90
-	angle_lookahead = 60
+	angle_right = 90  #arbirary
+	angle_lookahead = 60  #arbitrary
 
 	# To follow right wall
 	#er, dr = distance(angle_right,angle_lookahead, data)
