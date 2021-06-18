@@ -42,6 +42,26 @@ def control(error):
 	print "Steering Angle is = %f" % steering_angle 
 
 	# TO-DO: Publish the message
+
+def steering_cmd(centerline_error, steering_angle )
+
+	Kpgain =1.0
+	Kigain =1.0
+
+##  These two statements work the same.  I'm unsure on the signing of the centerline_error.
+##  Incorporating a Proportional gain is straightforwad. Kp * the error.
+##  Incorporating a Integral gain requires tracking error over the past X timesteps.  I'm not sure how to do that cleanly here.
+	if centerline_error > 0:
+		STEERING_ANGLE = centerline_error * Kpgain #+
+	if centerline_error < 0:
+		sSTEERING_ANGLE = centerline_error * Kpgain #+
+
+
+    msg.drive.steering_angle = STEERING_ANGLE
+    pub.publish(msg)
+
+
+
 	# ---
   # Aaron will code this.  Note that he will need to implement a publisher down at the bottom (we think?)
 	# ---
