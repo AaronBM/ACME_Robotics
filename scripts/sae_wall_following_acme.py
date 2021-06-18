@@ -39,7 +39,7 @@ def control(error):
 	elif steering_angle < -0.5:
 		steering_angle = -0.5
 
-	print "Steering Angle is = %f" % steering_angle 
+	print("Steering Angle is = %f" % steering_angle)
 
 	# TO-DO: Publish the message
 
@@ -82,15 +82,33 @@ def distance(angle_right, angle_lookahead, data):
 
 	# TO-DO: Find index of the two rays, and calculate a, b, alpha and theta. Find the actual distance from the right wall.
 	# ---
-  # CJ will code this
+	lookahead_indexes = range(get_index(angle_lookahead)-2,get_index(angle_lookahead)+2)
+	a_samples = np.array(data.ranges(lookahead_indexes))
+	distance_a = np.mean(a_samples)
+
+	indexes = range(get_index(angle_right)-2,get_index(angle_right)+2)
+	b_samples = np.array(data.ranges(indexes))
+	distance_b = np.mean(b_samples)
+
+	theta = angle_right - angle_lookahead
+	theta_rad = theta * np.pi/180
+
+	distance_c = pow(distance_a**2 + distance_b**2 - 2*distance_a*distance_b*np.cos(theta_rad),0.5) # Ray between end of a and b
+	distance_r = distance_a*distance_b/distance_c * np.sin(theta_rad)  # Distance from wall
+
+	if (distance_a**2 - distance_r**2 < distance_c**2):
+		alpha = -np.arccos(distance_r / distance_b)
+	else:
+		alpha = np.arccos(distance_r / distance_b)
+
 	# ---
 
-	print "Distance from right wall : %f" % distance_r
+	print("Distance from right wall : %f" % distance_r)
 
 	# Calculate error
-	error = 
+	error = distance_r - DISTANCE_RIGHT_THRESHOLD
 
-	return error, distance
+	return error, distance_r
 
 
 def follow_center(angle_right,angle_lookahead_right, data):
@@ -103,18 +121,21 @@ def follow_center(angle_right,angle_lookahead_right, data):
 
 	# Find Centerline error
 	# ---
-  # CJ will code this
+	track_width = dr + dl
+	centerline_distance = track_width / 2
+
+	centerline_error = centerline_distance - dr  # Positive centerline error defined to the right of CL
 	# ---
 
-	print "Centerline error = %f " % centerline_error
+	print("Centerline error = %f " % centerline_error)
 
 	return centerline_error
 
 def callback(data):
 
 	# Pick two rays at two angles
-	angle_right = 90
-	angle_lookahead = 60
+	angle_right = -90  #arbirary
+	angle_lookahead = -60  #arbitrary
 
 	# To follow right wall
 	#er, dr = distance(angle_right,angle_lookahead, data)
