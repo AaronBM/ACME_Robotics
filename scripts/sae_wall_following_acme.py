@@ -18,7 +18,7 @@ FREQUENCY = 10          # 10 Hz
 
 # Controller parameters
 kp = 0.7
-kd = 
+kd = 1.0
 
 # Other global variables
 error = 0.0
@@ -43,7 +43,12 @@ def control(error):
   print("Steering Angle is = %f" % steering_angle)
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	# TO-DO: Publish the message
+=======
+  # TO-DO: Publish the message
+  # ---
+>>>>>>> origin/main
 
 def steering_cmd(centerline_error, steering_angle )
 
@@ -64,12 +69,16 @@ def steering_cmd(centerline_error, steering_angle )
 
 
 
+<<<<<<< HEAD
 	# ---
 =======
   # TO-DO: Publish the message
   # ---
 >>>>>>> d6c60e8ce048d86b5e07c8287cfe7c7ba5b6acb6
   # Aaron will code this.  Note that he will need to implement a publisher down at the bottom (we think?)
+=======
+	# ---  # Aaron will code this.  Note that he will need to implement a publisher down at the bottom (we think?)
+>>>>>>> origin/main
   # ---
 
 def get_index(angle, data):
@@ -114,7 +123,11 @@ def distance(angle_right, angle_lookahead, data):
   print("Distance from right wall : %f" % distance_r)
 
   # Calculate error
+<<<<<<< HEAD
   error = DISTANCE_RIGHT_THRESHOLD - distance_r + (l * cos(alpha*np.pi/180)
+=======
+  error = DISTANCE_RIGHT_THRESHOLD - distance_r + (l * np.cos(alpha*np.pi/180))
+>>>>>>> origin/main
 
   return error, distance_r
 
@@ -141,6 +154,7 @@ def callback(data):
   # Pick two rays at two angles
   angle_right = -90  #arbirary
   angle_lookahead = -45  #arbitrary
+<<<<<<< HEAD
 
   # To follow right wall
   #er, dr = distance(angle_right,angle_lookahead, data)
@@ -150,6 +164,17 @@ def callback(data):
 
   control(ec)
 
+=======
+
+  # To follow right wall
+  #er, dr = distance(angle_right,angle_lookahead, data)
+
+  # To follow the centerline
+  ec = follow_center(angle_right,angle_lookahead, data)
+
+  control(ec)
+
+>>>>>>> origin/main
   rospy.Frequency(FREQUENCY)
 
 if __name__ == '__main__':
