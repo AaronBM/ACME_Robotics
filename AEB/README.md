@@ -1,5 +1,15 @@
 # ACME_Robotics
+# Inception... 20210618  
+
+# Authors  ....  Aaron  -  aaronbmatthews@gmail.com
+# Authors  ....  CJ     -  CJtheTeacher@someschool.edu 
+# Authors  ....  Mark   -  theMark@sae.org
+# Authors  ....  Erika  -  Erika@beachbum.sbcglobal.net
+
+
 SAE Robotics BootCamp Summer 2021
+https://sae.instructure.com/courses/143/assignments/259?module_item_id=821
+
 
 ============sae_aeb_hainley.py INSTRUCTIONS========================
 
