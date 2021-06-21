@@ -18,7 +18,7 @@ FREQUENCY = 10          # 10 Hz
 
 # Controller parameters
 kp = 0.7
-kd = 
+kd = 1.0
 
 # Other global variables
 error = 0.0
@@ -89,7 +89,7 @@ def distance(angle_right, angle_lookahead, data):
   print("Distance from right wall : %f" % distance_r)
 
   # Calculate error
-  error = DISTANCE_RIGHT_THRESHOLD - distance_r + (l * cos(alpha*np.pi/180)
+  error = DISTANCE_RIGHT_THRESHOLD - distance_r + (l * np.cos(alpha*np.pi/180))
 
   return error, distance_r
 
