@@ -2,7 +2,7 @@
 # Inception... 20210618  
 
 # Authors  ....  Aaron  -  aaronbmatthews@gmail.com
-# Authors  ....  CJ     -  CJtheTeacher@someschool.edu 
+# Authors  ....  CJ     -  chainley@alum.mit.edu
 # Authors  ....  Mark   -  theMark@sae.org
 # Authors  ....  Erika  -  Erika@beachbum.sbcglobal.net
 
