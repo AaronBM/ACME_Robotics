@@ -17,7 +17,8 @@ VELOCITY = 0.1 					# meters per second
 
 # Controller parameters
 kp = 0.7
-kd = 
+ki = 0.2
+kd = 0.0
 
 # Other global variables
 error = 0.0
@@ -25,8 +26,9 @@ prev_error = 0.0
 
 def control(error):
 	global kp
-	global kd
+	global ti
 	global VELOCITY
+
 
 	# TO-DO: Implement controller
 	# ---
@@ -45,16 +47,13 @@ def control(error):
 
 def steering_cmd(centerline_error, steering_angle )
 
-	Kpgain =1.0
-	Kigain =1.0
-
-##  These two statements work the same.  I'm unsure on the signing of the centerline_error.
-##  Incorporating a Proportional gain is straightforwad. Kp * the error.
-##  Incorporating a Integral gain requires tracking error over the past X timesteps.  I'm not sure how to do that cleanly here.
-	if centerline_error > 0:
-		STEERING_ANGLE = centerline_error * Kpgain #+
-	if centerline_error < 0:
-		sSTEERING_ANGLE = centerline_error * Kpgain #+
+       
+	if abs(centerline_error) > 0:
+              prop_term = centerline_error
+              int_term  = prev_error + centerline_error *  .1   # !!! I'm assuiming step time of .1 !!!
+              der_term  = (centerline_error - prev_error) /  .1 # !!! I'm assuiming step time of .1 !!!
+              STEERING_ANGLE = prop_term * kp + int_term * ki + der_term * kd
+              prev_error = centerline_error 
 
 
     msg.drive.steering_angle = STEERING_ANGLE
