@@ -18,7 +18,6 @@ FREQUENCY = 10  # 10 Hz
 
 # Controller parameters
 kp = 0.7
-
 ki = 0.2
 kd = 0.0
 
@@ -28,7 +27,6 @@ prev_error = 0.0
 
 
 def control(centerline_error, steering_angle):
-
   global kp
   global kd
   global VELOCITY
@@ -46,17 +44,15 @@ def control(centerline_error, steering_angle):
 
   print("Steering Angle is = %f" % steering_angle)
 
+  # TO-DO: Publish the message
+  # ---
 
-# TO-DO: Publish the message
-# ---
-
-       
   if abs(centerline_error) > 0:
-     prop_term = centerline_error
-     int_term  = prev_error + centerline_error *  (1/FREQUENCY)   
-     der_term  = (centerline_error - prev_error) /  (1/FREQUENCY)  
-     STEERING_ANGLE = prop_term * kp + int_term * ki + der_term * kd
-     prev_error = centerline_error 
+    prop_term = centerline_error
+    int_term = prev_error + centerline_error * (1 / FREQUENCY)
+    der_term = (centerline_error - prev_error) / (1 / FREQUENCY)
+    STEERING_ANGLE = prop_term * kp + int_term * ki + der_term * kd
+    prev_error = centerline_error
 
   msg.drive.steering_angle = STEERING_ANGLE
   pub.publish(msg)
@@ -69,12 +65,18 @@ def get_index(angle, data):
   # 	# TO-DO: For a given angle, return the corresponding index for the data.ranges array
   # ---
   # Rewrite our original get_index function so that it returns a single number for the index.  We can then use this number to extract further angle and mid-angle points.
-  # Erika is going to adapt that code.
+  angle_inc = data.angle_increment * 180 / np.pi
+  angle_min = data.angle_min * 180 / np.pi
+  angle_max = data.angle_max * 180 / np.pi
+
+  all_angles = np.arange(angle_min, angle_max, angle_inc)
+
+  tf_values = (angle < all_angles) & (all_angles < angle + angle_inc)
+
+  index = tf_values.index(TRUE)
   # This should return a single value index (an int value)
 
   return index
-
-
 # ---
 
 def distance(angle_right, angle_lookahead, data):
