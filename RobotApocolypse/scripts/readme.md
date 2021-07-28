@@ -1,5 +1,13 @@
 
 
+After following the first reference and install the dependencies...
+check install with sudo pip install RPLCD
+
+run a script with
+python LCD_message.py
+# Not python3 !!
+
+
 references
 Fundamentals needed for install and running a script. 
 https://phppot.com/web/guide-to-setup-raspberry-pi-with-lcd-display-using-i2c-backpack/
